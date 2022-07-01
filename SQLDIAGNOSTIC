@@ -1,0 +1,34 @@
+**free
+//this source would be using different scenarios of get diagnostics....
+//variable declarations
+dcl-s sqlResult1 char(50);
+dcl-s numRows int(3);
+
+dcl-ds imageSet qualified dim(10);
+    imageName char(30);
+end-ds;
+
+exec sql declare image cursor for
+         select imgname from rahulp.image;
+ exec sql open image;
+ exec sql get diagnostics :numRows = DB2_NUMBER_ROWS;
+ exec sql fetch image into :sqlResult1 ;
+ dsply %char(numRows);
+ exec sql close image;
+
+  exec sql declare image1 cursor for
+           select imgname from rahulp.image;
+  exec sql open image1;
+  exec sql get diagnostics :numRows = DB2_NUMBER_ROWS;
+  dsply %char(numRows);
+  exec sql get diagnostics :numRows = ROW_COUNT;
+  dsply %char(numRows);
+  exec sql fetch image1 for :numrows ROWS into :imageSet;
+  exec sql get diagnostics :numRows = ROW_COUNT;
+  exec sql fetch image for 100 ROWS into :imageSet;
+  exec sql close image1;
+  dsply %char(numRows);
+ *inLr = *on;
+ return;
+
+
