@@ -1,0 +1,21 @@
+**free
+dcl-s retDATE    char(8);
+dcl-ds outarray  dim(10) qualified;
+   resultStr char(30);
+end-ds;
+dcl-s  woutimage   char(30);
+dcl-s count int(3);
+exec sql set option commit = *none;
+
+*inLR = *on;
+// Main Line goes here
+
+    count = 1;
+    clear woutimage;
+    clear outarray;
+    exec sql declare S1 cursor for
+             select imgname from rahulp.image ;
+
+    exec sql open S1;
+    exec sql set result sets cursor S1 ;
+    return;
