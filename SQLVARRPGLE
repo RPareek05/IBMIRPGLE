@@ -1,0 +1,14 @@
+**free
+//ctl-opt dftactgrp(*no);
+dcl-pr thispgm extpgm('SQLVAR2');
+end-pr;
+dcl-pi thispgm ;
+end-pi;
+dcl-s w_sqlvar char(30);
+exec sql set option commit = *none;
+//exec sql set schema  'RAHULP';
+exec sql create or replace variable rahulp.satya1 char(40);
+exec sql values(a1) into :w_sqlvar;
+exec sql select coalesce(satya1,' ') into :w_sqlvar
+         from sysibm.sysdummy1;
+*inLr = *on;
