@@ -26,3 +26,4 @@ exec sql set option commit = *none;
 //exec sql call getdate(:retDATE);
 //dsply retDATE;
 // this is github demo
+// this is test demo
