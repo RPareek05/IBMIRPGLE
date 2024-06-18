@@ -22,6 +22,7 @@ exec sql set option commit = *none;
     enddo;
     exec sql set result sets array :outarray for :count rows;
     return;
+    //new commented line
 //Bye...
 //exec sql call getdate(:retDATE);
 //dsply retDATE;
