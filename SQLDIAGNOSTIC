@@ -31,5 +31,6 @@ exec sql declare image cursor for
  *inLr = *on;
  return;
  // Added a commendted line
+ //added one more comment line
 
 
