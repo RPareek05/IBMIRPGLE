@@ -30,5 +30,6 @@ exec sql declare image cursor for
   dsply %char(numRows);
  *inLr = *on;
  return;
+ // Added a commendted line
 
 
