@@ -13,3 +13,4 @@ exec sql select coalesce(satya1,' ') into :w_sqlvar
          from sysibm.sysdummy1;
 *inLr = *on;
 //added a commented line
+//added in one line
