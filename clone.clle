@@ -1,0 +1,42 @@
+        pgm parm(&ifsdir &repoloc &synclib)
+
+            dcl  var(&ifsdir)   type(*char)  len(100)
+            dcl  var(&synclib)  type(*char)  len(10)
+            dcl  var(&repoloc)  type(*char)  len(80)
+            dcl  var(&errflg)   type(*dec)   len(1)
+            dcl  var(&inistr)   type(*char)  len(50)
+            dcl  var(&chgdir)   type(*char)  len(200)
+            dcl  var(&branch)   type(*char)  len(50)
+            dcl  var(&cmdstr)   type(*char)  len(300)
+
+            /*Main Line*/
+             if  cond(&ifsdir *eq ' ') then(do)
+               goto cmdlbl(error1)
+             enddo
+
+              if  cond(&repoloc *eq ' ') then(do)
+               goto cmdlbl(error1)
+             enddo
+
+             if cond(&synclib   *ne ' ') then(DO)
+              chkobj  obj(&synclib) objtype(*lib)
+              monmsg  msgid(cpf0000) exec(do)
+               chgvar var(&errflg)  value(1)
+               goto cmdlbl(error1)
+              enddo
+             enddo
+
+             chgvar   var(&cmdstr) value('/home/cecuser/gitclone.sh')
+             CHGVAR   var(&cmdstr) value(%trim(&cmdstr) *bcat +
+                          %trim(&ifsdir))
+             chgvar   var(&cmdstr) value(%trim(&cmdstr) *bcat  +
+                                         &repoloc)
+
+             strqsh cmd(&cmdstr)
+
+     error1:
+             if cond(&errflg *eq 1) then(do)
+             enddo
+     endpgm:
+
+endpgm
